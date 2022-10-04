@@ -1,19 +1,18 @@
-﻿/*using Microsoft.AspNetCore.Http.Abstractions;
-using Microsoft.AspNetCore.Http.HttpResults;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityMinimalAPIs.Filters
 {
     public class ProblemDetailsServiceEndpointFilter
     {
-        public async ValueTask<object?> InvokeAsync( context, EndpointFilterDelegate next)
+        public async ValueTask<object?> InvokeAsync(EndpointFilterInvocationContext context, EndpointFilterDelegate next)
          => await next(context) switch
-      {
-          ProblemHttpResult problemHttpResult => new ProblemDetailsServiceAwareResult(problemHttpResult.StatusCode, problemHttpResult.ProblemDetails),
-          ProblemDetails problemDetails => new ProblemDetailsServiceAwareResult(null, problemDetails),
-          { } result => result,
-          null => null
-      };
+         {
+             ProblemHttpResult problemHttpResult => new ProblemDetailsServiceAwareResult(problemHttpResult.StatusCode, problemHttpResult.ProblemDetails),
+             ProblemDetails problemDetails => new ProblemDetailsServiceAwareResult(null, problemDetails),
+             { } result => result,
+             null => null
+         };
         private class ProblemDetailsServiceAwareResult : IResult
         {
             private readonly int? _statusCode;
@@ -41,4 +40,3 @@ namespace IdentityMinimalAPIs.Filters
         }
     }
 }
-*/
