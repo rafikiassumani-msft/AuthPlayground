@@ -9,8 +9,8 @@ import {
   Alert,
 } from "@mui/material";
 
-import { useAuth } from "./AuthProvider";
-import { postData } from "./fetchData";
+import { useAuth } from "../AuthProvider";
+import { postData } from "../fetchData";
 
 const eventFormReducer = (state, eventData) => {
   return {

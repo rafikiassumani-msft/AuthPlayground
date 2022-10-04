@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "./AuthProvider";
+import { useAuth } from "../AuthProvider";
 import UserAccountMenu from "./UserAccountMenu";
 import { Grid } from "@mui/material";
 

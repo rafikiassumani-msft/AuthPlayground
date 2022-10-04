@@ -14,8 +14,8 @@ import { green } from "@mui/material/colors";
 
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CancelIcon from "@mui/icons-material/Cancel";
-import { useAuth } from "./AuthProvider";
-import { postData } from "./fetchData";
+import { useAuth } from "../AuthProvider";
+import { postData } from "../fetchData";
 import VerifyPhoneNumber from "./VerifyPhoneNumber";
 
 export default function PhoneNumberSettingsTab() {

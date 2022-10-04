@@ -12,8 +12,8 @@ import {
   FormControlLabel,
   FormGroup,
 } from "@mui/material";
-import { useAuth } from "./AuthProvider";
-import { postData } from "./fetchData";
+import { useAuth } from "../AuthProvider";
+import { postData } from "../fetchData";
 import AuthenticatorData from "./AuthenticatorData";
 
 const eventFormReducer = (state, eventData) => {

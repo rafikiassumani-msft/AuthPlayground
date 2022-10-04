@@ -1,16 +1,16 @@
 import * as React from "react";
 import { Routes, Route } from "react-router-dom";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
-import VerifyEmail from "./VerifyEmail";
-import Validate2fa from "./Validate2fa";
-import UserAccount from "./UserAccount";
+import SignIn from "./SignIn/SignIn";
+import SignUp from "./SignUp/SignUp";
+import VerifyEmail from "./UserAccount/VerifyEmail";
+import Validate2fa from "./SignIn/Validate2fa";
+import UserAccount from "./UserAccount/UserAccount";
 import Unauthorized from "./Unauthorized";
 import RequireAuth from "./RequireAuth";
-import UserAccountMenu from "./UserAccountMenu";
-import LoginWithRecoveryCode from "./LoginWithRecoveryCode";
-import ForgotPassword from "./ForgotPassword";
-import ResetPasword from "./ResetPassword";
+import UserAccountMenu from "./UserAccount/UserAccountMenu";
+import LoginWithRecoveryCode from "./SignIn/LoginWithRecoveryCode";
+import ForgotPassword from "./SignIn/ForgotPassword";
+import ResetPasword from "./SignIn/ResetPassword";
 
 function AppRoutes() {
   return (

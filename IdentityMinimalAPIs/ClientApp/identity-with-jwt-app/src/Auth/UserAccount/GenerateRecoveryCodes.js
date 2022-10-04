@@ -11,8 +11,8 @@ import {
 } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 import SaveIcon from "@mui/icons-material/Save";
-import { useAuth } from "./AuthProvider";
-import { getData } from "./fetchData";
+import { useAuth } from "../AuthProvider";
+import { getData } from "../fetchData";
 
 export default function GenerateRecoveryCodes() {
   const [displayError, setDisplayError] = useState(false);

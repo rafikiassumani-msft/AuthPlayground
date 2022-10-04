@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 import { Alert, Divider } from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { useAuth } from "./AuthProvider";
+import { useAuth } from "../AuthProvider";
 
 export default function VerifyAuthenticatorSetup() {
   const { userData } = useAuth();

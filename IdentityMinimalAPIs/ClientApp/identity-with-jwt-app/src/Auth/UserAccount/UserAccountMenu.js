@@ -12,7 +12,7 @@ import UserInfoTab from "./UserInfoTab";
 import ChangePasswordTab from "./ChangePasswordTab";
 import PhoneNumberSettingsTab from "./PhoneNumberSettingsTab";
 import TwoFactorAuthTab from "./TwoFactorAuthTab";
-import { useAuth } from "./AuthProvider";
+import { useAuth } from "../AuthProvider";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;

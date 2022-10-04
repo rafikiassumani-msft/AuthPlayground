@@ -10,8 +10,8 @@ import {
   Divider,
   Alert,
 } from "@mui/material";
-import { postData } from "./fetchData";
-import { useAuth } from "./AuthProvider";
+import { postData } from "../fetchData";
+import { useAuth } from "../AuthProvider";
 
 const eventFormReducer = (state, eventData) => {
   return {

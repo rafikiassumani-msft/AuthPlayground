@@ -14,8 +14,8 @@ import {
 
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { green, red } from "@mui/material/colors";
-import { postData } from "./fetchData";
-import { useAuth } from "./AuthProvider";
+import { postData } from "../fetchData";
+import { useAuth } from "../AuthProvider";
 
 const eventFormReducer = (state, eventData) => {
   return {

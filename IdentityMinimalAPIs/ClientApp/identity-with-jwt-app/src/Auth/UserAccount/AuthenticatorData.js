@@ -7,8 +7,8 @@ import {
   Divider,
   Chip,
 } from "@mui/material";
-import { useAuth } from "./AuthProvider";
-import { getData, postData } from "./fetchData";
+import { useAuth } from "../AuthProvider";
+import { getData } from "../fetchData";
 import VerifyAuthenticatorSetup from "./VerifyAuthenticatorSetup";
 import QRCode from "react-qr-code";
 import { Stack } from "@mui/system";

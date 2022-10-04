@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
@@ -9,30 +9,30 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "./AuthProvider";
+import { useAuth } from "../AuthProvider";
 import { Alert } from "@mui/material";
 
-export default function Validate2fa() {
+export default function SignIn() {
   const navigate = useNavigate();
   const { setIsLoggedIn } = useAuth();
-  const [displayError, setDisplayError] = React.useState(null);
+  const [logInError, SetLogInError] = useState(false);
+  const [loginErrorMessage, SetLogInErrorMessage] = useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    validate2fa(data);
+    signIn(data);
   };
 
-  const validate2fa = async (data) => {
+  const signIn = async (data) => {
     try {
       let response = await fetch(
-        `${process.env.REACT_APP_API_URL}/auth/validate2faCode`,
+        `${process.env.REACT_APP_API_URL}/auth/login`,
         {
           method: "post",
           body: JSON.stringify({
-            twoFactorCode: data.get("twoFactorCode"),
-            email: JSON.parse(sessionStorage.getItem("twoFaRequirements"))
-              .email,
+            email: data.get("email"),
+            password: data.get("password"),
           }),
           headers: {
             "content-type": "application/json",
@@ -41,22 +41,26 @@ export default function Validate2fa() {
       );
 
       if (!response.ok) {
-        throw new Error("Unable to validate the auth code");
+        throw new Error("Unable to login. Your username or password is incorrect. Try again or reset your credentials")
       }
 
       let jsonResponse = await response.json();
 
-      if (!jsonResponse.twoFactorAuthSatisfied) {
-        navigate("/forbidden");
-        //Print error message on the screen
+      if (jsonResponse.requiredTwoFactor) {
+        sessionStorage.setItem(
+          "twoFaRequirements",
+          JSON.stringify(jsonResponse)
+        );
+        navigate("/validate-two-fa");
       } else {
-        sessionStorage.setItem("tokens", JSON.stringify(jsonResponse));
         setIsLoggedIn(true);
+        sessionStorage.setItem("tokens", JSON.stringify(jsonResponse));
         navigate("/user-account");
       }
-    } catch (error) {
-      console.error(error);
-      setDisplayError(error.message);
+    } catch (err) {
+      SetLogInError(true);
+      SetLogInErrorMessage(err.message);
+      console.log(err);
     }
   };
 
@@ -74,17 +78,13 @@ export default function Validate2fa() {
           <LockOutlinedIcon />
         </Avatar>
 
-        <Typography component="h1" variant="h6">
-          Verify two factor Code
+        <Typography component="h1" variant="h5">
+          Sign in
         </Typography>
 
-        <Typography variant="caption" display="block" gutterBottom>
-          (SMS Code, Authenticator Code, Email Code)
-        </Typography>
-
-        {displayError && (
+        {logInError && (
           <Alert variant="filled" severity="error">
-            {displayError}
+            {loginErrorMessage}
           </Alert>
         )}
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
@@ -92,10 +92,21 @@ export default function Validate2fa() {
             margin="normal"
             required
             fullWidth
-            id="twoFactorCode"
-            label="Two factor Code"
-            name="twoFactorCode"
+            id="email"
+            label="Email Address"
+            name="email"
+            autoComplete="email"
             autoFocus
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
           />
           <Button
             type="submit"
@@ -103,18 +114,20 @@ export default function Validate2fa() {
             variant="contained"
             sx={{ mt: 3, mb: 2 }}
           >
-            Verify Code
+            Sign In
           </Button>
-
-          {displayError && (
-            <Grid container>
-              <Grid item xs={12}>
-                <Link href="login-with-recovery-code" variant="body2">
-                  {"Try a different way? Redeem Auth Code"}
-                </Link>
-              </Grid>
+          <Grid container>
+            <Grid item xs>
+              <Link href="forgot-password" variant="body2">
+                Forgot password?
+              </Link>
             </Grid>
-          )}
+            <Grid item>
+              <Link href="sign-up" variant="body2">
+                {"Don't have an account? Sign Up"}
+              </Link>
+            </Grid>
+          </Grid>
         </Box>
       </Box>
     </Container>
