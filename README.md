@@ -12,7 +12,7 @@ When the user successfully authenticate (After two-factor), the auth endpoint ge
 
 ## JWT Token Invalidations
 
-This project uses three strategies for JWT token (Access token) invalidation. These three strategies rely on the DB queries, therefore making the jwt scenarios stateful. You can configure the strategy using below code:
+This project uses three strategies for JWT token (Access token) invalidation. These three strategies rely on the DB queries, therefore making the jwt scenarios stateful. You can configure your preferred strategy using below code:
 
 ```C#
 
@@ -24,6 +24,8 @@ builder.Services.AddJwtRevocationStrategy(options =>
 });
 
 ```
+
+In case you don't want to bother about token invalidation, you can just configure your JWT tokens to be short lived (10-15 min) and use the refresh token endpoint to re-issue the access token and keep the user logged. You'll need, however have to change the authentication configuration to use the jwtbearer validation mechanisms that come with ASPNET Core. 
 
 ### 1. JTI Matcher Strategy
 
