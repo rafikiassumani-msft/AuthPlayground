@@ -16,5 +16,5 @@ This project uses three strategies for JWT token (Access token) invalidation.
 
 ### JTI Matcher Strategy
 
-We store the access token's jti (unique identifier) with the user info. This is an additional column in the user info table. Upon a successful authentication and token generation, this jti value is saved to the user table. When the user calls the `/logout` endpoint, we set the jti column to `null`. To validate if a token has not been revoked, the custom auth middleware queries the DB database for the jti value and compares it with the provided token jti value. if the values match, the calls goes through, otherwise the call is rejected.
+We store the access token's jti (unique identifier) with the user info. This is an additional column in the user info table. Upon a successful authentication and token generation, this jti value is saved to the user table. When the user calls the `/auth/logout` endpoint, we set the jti column to `null`. To validate if a token has not been revoked, the custom auth middleware queries the DB database for the jti value and compares it with the provided token jti value. if the values match, the calls goes through, otherwise the call is rejected with 401.
 
