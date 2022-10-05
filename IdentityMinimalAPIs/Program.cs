@@ -32,6 +32,8 @@ builder.Services.AddAuthentication("CustomJwt").AddScheme<CustomJwtAuthenticatio
 builder.Services.AddJwtRevocationStrategy(options =>
 {
     options.StrategyName = JwtRevocationStrategyConstants.JtiMatchter;
+    //options.StrategyName = JwtRevocationStrategyConstants.AllowList;
+    //options.StrategyName = JwtRevocationStrategyConstants.Denylist;
 });
 
 builder.Services.AddAuthorization();

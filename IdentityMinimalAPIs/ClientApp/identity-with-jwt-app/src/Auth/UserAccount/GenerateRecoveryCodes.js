@@ -49,7 +49,7 @@ export default function GenerateRecoveryCodes() {
           <Card sx={{ minWidth: 275 }}>
             <CardContent>
               <Typography component="h2" variant="h6">
-                Generate recover codes
+                Generate recovery codes
               </Typography>
               <Divider />
               <Typography variant="caption" display="block" gutterBottom>

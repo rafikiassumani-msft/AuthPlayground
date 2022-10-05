@@ -40,7 +40,7 @@ namespace IdentityMinimalAPIs.Services.Auth
 
             var accessToken = authHeader.Last();
             var claimsPrincipal = _tokenService.ValidateAccessToken(accessToken);
-          
+
             if (claimsPrincipal == null)
             {
                 return Task.FromResult(AuthenticateResult.Fail("Invalid access token supplied"));
@@ -52,7 +52,7 @@ namespace IdentityMinimalAPIs.Services.Auth
 
             var isRevoked = tokenRevocationHandler.IsTokenRevoked(userId, jti);
 
-            if(isRevoked.Result)
+            if (isRevoked.Result)
             {
                 return Task.FromResult(AuthenticateResult.Fail("Invalid access token"));
             }
