@@ -13,7 +13,17 @@ When the user successfully authenticate (After two-factor), the auth endpoint ge
 
 ## JWT Token Invalidations
 
-This project uses three strategies for JWT token (Access token) invalidation. 
+This project uses three strategies for JWT token (Access token) invalidation. You can configure the strategy using below code: 
+```C#
+
+builder.Services.AddJwtRevocationStrategy(options =>
+{
+    options.StrategyName = JwtRevocationStrategyConstants.JtiMatchter;
+    //options.StrategyName = JwtRevocationStrategyConstants.AllowList;
+    //options.StrategyName = JwtRevocationStrategyConstants.Denylist;
+});
+
+```
 
 ### 1. JTI Matcher Strategy
 
@@ -23,6 +33,6 @@ We store the access token's jti (unique identifier) with the user info. This is 
 
 With this strategt, we create an allow list table that stores the userId, information from the token (jti) and token experition timestamp. Rather than storing the full blown JWT, we store the jti instead. When the user successfully authenticates, we generate a jwt token and stores its jti in the allowed list table. To validate if the token has not been revoked, the custom middleware decodes the token, gets its jti matcher and queries the allowed list table and compares the token jti values and the experation timestamp. The user can setup a batch process for cleaning up this table based on token experition timestamp. 
 
-### 3. Disallowed List Strategy
+### 3. Deny(Disalow) List Strategy
 
 When the token is revoked either through calling `/auth/logout` or `auth/revoke` endpoints, the token's jti, user Id and token experition timestamp are stored in a disallowed table. When the user calls a protected endpoint, the custom middleware decodes the token, queries the database for the jti value and compares the decoded jti claim to the value from the DB. If they match, then we know the token has been revoked and therefore the middleware rejects the request with 401 http status code. 
