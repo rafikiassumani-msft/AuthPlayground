@@ -12,7 +12,8 @@ When the user successfully authenticate (After two-factor), the auth endpoint ge
 
 ## JWT Token Invalidations
 
-This project uses three strategies for JWT token (Access token) invalidation. You can configure the strategy using below code: 
+This project uses three strategies for JWT token (Access token) invalidation. These three strategies rely on the DB queries, therefore making the jwt scenarios stateful. You can configure the strategy using below code:
+
 ```C#
 
 builder.Services.AddJwtRevocationStrategy(options =>
@@ -68,11 +69,6 @@ Your app should be served at port 3000. Depending on the port for your backend, 
 
 `REACT_APP_API_URL=https://localhost:7115`
 
-## TODOS
- 1. Implement the cookie auth for Single page apps hosted on the same domain as the backend and server side rendered SPAs. 
- 2. Deploy these apps to Azure with terraform.
- 3. Write tests for the Minimal API backend and reactjs frontend.
-
 ## Some UI Screens
 
 ### 1. Sign up 
@@ -84,4 +80,9 @@ Your app should be served at port 3000. Depending on the port for your backend, 
 
 The user can also log in by redeeming one of the authenticator recovery codes.
 
-#### Other available screens (Forgot Passowrd flow, Login With Authenticator Code, Validate Email, Confirm Phone Number)
+### 3. Other available screens (Forgot Passowrd flow, Login With Authenticator Code, Validate Email, Confirm Phone Number)
+
+## TODOS
+ 1. Implement the cookie auth for Single page apps hosted on the same domain as the backend and server side rendered SPAs. 
+ 2. Deploy these apps to Azure with terraform.
+ 3. Write tests for the Minimal API backend and reactjs frontend.
