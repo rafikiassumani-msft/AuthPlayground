@@ -1,9 +1,8 @@
-# ASPNET Core Identity with Minimal APIs
+# ASPNET Core Identity with Minimal APIs & Reactjs UI
 
 This project create aspnet core Identity http endpoints with Minimal API features and a [Reactjs](https://github.com/rafikiassumani-msft/AuthPlayground/tree/main/IdentityMinimalAPIs/ClientApp/identity-with-jwt-app) app that implements the ASPNET Identity UI screens. It uses `IUserManager`, `ISigningManager` and other existing ASPNET Core Identity services.  The project implements a two factor auth using email, sms (Twilio) and TOTP Authenticator app. Upon signing up and email confirmation, the user can choose to set-up one of the provided two-factor (Email, Phone, Authenticator App) methods for two-factor auth. Below is the list of provided http endpoints:
 ![image](https://user-images.githubusercontent.com/87031580/194159455-3c215c4c-afdf-49de-9333-26a6b3e14bb1.png)
 ![image](https://user-images.githubusercontent.com/87031580/194159617-e3d95945-9b4f-462b-b5b6-bdc58f6f90f1.png)
-
 
 ## Custom JWT integration
 
@@ -35,4 +34,46 @@ With this strategt, we create an allow list table that stores the userId, inform
 
 ### 3. Deny(Disalow) List Strategy
 
-When the token is revoked either through calling `/auth/logout` or `auth/revoke` endpoints, the token's jti, user Id and token experition timestamp are stored in a disallowed table. When the user calls a protected endpoint, the custom middleware decodes the token, queries the database for the jti value and compares the decoded jti claim to the value from the DB. If they match, then we know the token has been revoked and therefore the middleware rejects the request with 401 http status code. 
+When the token is revoked either through calling `/auth/logout` or `auth/revoke` endpoints, the token's jti, user Id and token experition timestamp are stored in a disallowed table. When the user calls a protected endpoint, the custom middleware decodes the token, queries the database for the jti value and compares the decoded jti claim to the value from the DB. If they match, then we know the token has been revoked and therefore the middleware rejects the request with 401 http status code.
+
+## How to run the apps
+
+### 1. Backend
+
+1. The backend relies on ef core. You'll need to generate the ef core schemas `dotnet ef migrations add InitialIdenityMigration` and then ` ef dotnet ef database update ` to create your DB and tables. 
+2. For email confirmation, phone number confirmation and two factor auth to work, you'll need to provide the following secrets: 
+
+```JSON
+{
+  "Twilio:TwilioPhoneNumber": "Your twilio number",
+  "Twilio:AuthToken": "Your twilio auth token",
+  "Twilio:AccountSID": "Your twilio account sid",
+  "SendGridEmail:ApiKey": "your sendgrip API key",
+  "Twilio:VerificationServiceSID": "Your twilio verification sid for phone number verifications",
+  "JwtSettings:Issuer": "https://localhost:7115 - Can be replaced with your own",
+  "JwtSettings:Audience": "https://localhost:7115 - Can be replaced with your own",
+  "JwtSettings:TokenSecretKey": "You jwt token secrets used for signing the tokens"
+}
+
+```
+
+### 2. Frontend
+
+1. Ensure you have the latest nodejs and run the following command: 
+
+`npm install`
+`npm start`
+
+Your app should be served at port 3000. Depending on the port for your backend, you may need to change the following value of the url in the `.env.development` 
+
+`REACT_APP_API_URL=https://localhost:7115`
+
+## TODOS
+ 1. Implement the cookie auth for Single page apps hosted on the same domain as the backend and server side rendered SPAs. 
+ 2. Deploy these apps to Azure with terraform.
+
+## Some UI Screens
+
+### 1. Sign up 
+
+
