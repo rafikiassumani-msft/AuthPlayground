@@ -76,4 +76,11 @@ Your app should be served at port 3000. Depending on the port for your backend, 
 
 ### 1. Sign up 
 
+<img width="362" alt="image" src="https://user-images.githubusercontent.com/87031580/194180123-a46556f5-b2c0-4570-aba6-7a5e8946ffca.png">
 
+### 2. Sign In flow with Authenticator
+![sign-in-image-flow](https://user-images.githubusercontent.com/87031580/194182152-02d302db-428f-4d9b-9608-27a786735819.png)
+
+The user can also log in by redeeming one of the authenticator recovery codes.
+
+### 3. Change Password flow
