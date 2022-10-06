@@ -1,6 +1,6 @@
 # ASPNET Core Identity with Minimal APIs & Reactjs UI
 
-This project create aspnet core Identity http endpoints with Minimal API features and a [Reactjs](https://github.com/rafikiassumani-msft/AuthPlayground/tree/main/IdentityMinimalAPIs/ClientApp/identity-with-jwt-app) app that implements the ASPNET Identity UI screens. It uses `IUserManager`, `ISigningManager` and other existing ASPNET Core Identity services.  The project implements a two factor auth using email, sms (Twilio) and TOTP Authenticator app. Upon signing up and email confirmation, the user can choose to set-up one of the provided two-factor (Email, Phone, Authenticator App) methods for two-factor auth. Below is the list of provided http endpoints:
+This project create aspnet core Identity http endpoints with Minimal API features and a [Reactjs](https://github.com/rafikiassumani-msft/AuthPlayground/tree/main/IdentityMinimalAPIs/ClientApp/identity-with-jwt-app) app that implements the ASPNET Identity UI screens. It uses `IUserManager`, `ISigningManager` and other existing ASPNET Core Identity services.  The project implements a two factor auth using email, sms (Twilio) and TOTP Authenticator app. Upon signing up and email confirmation, the user can choose to set-up one of the provided two-factor (Email, Phone, Authenticator App) methods. Below is the list of provided http endpoints:
 ![image](https://user-images.githubusercontent.com/87031580/194159455-3c215c4c-afdf-49de-9333-26a6b3e14bb1.png)
 ![image](https://user-images.githubusercontent.com/87031580/194159617-e3d95945-9b4f-462b-b5b6-bdc58f6f90f1.png)
 
@@ -43,7 +43,7 @@ When the token is revoked either through calling `/auth/logout` or `auth/revoke`
 
 ### 1. Backend
 
-1. The backend relies on ef core. You'll need to generate the ef core schemas `dotnet ef migrations add InitialIdenityMigration` and then ` ef dotnet ef database update ` to create your DB and tables. 
+1. The backend relies on ef core. You'll need to generate the ef core schemas `dotnet ef migrations add InitialIdenityMigration` and then `dotnet ef database update ` to create your DB and tables. 
 2. For email confirmation, phone number confirmation and two factor auth to work, you'll need to provide the following secrets: 
 
 ```JSON
