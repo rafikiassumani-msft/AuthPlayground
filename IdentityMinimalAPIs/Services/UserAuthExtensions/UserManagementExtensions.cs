@@ -621,7 +621,7 @@ namespace IdentityMinimalAPIs.Services.UserAuthExtensions
         private static async Task SendEmailConfirmationCode(IEmailServiceProvider emailServiceProvider, string userEmailAddress, String userId, string code)
         {
             //Since this an API, should we generate 8 char codes ?
-            var callBackUrl = $"http://localhost:3000/confirm-email?confirmationCode={code}&userId={userId}";
+            var callBackUrl = $"http://localhost:3000/verify-email?confirmationCode={code}&userId={userId}";
             var message = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callBackUrl)}'>clicking here</a>.";
             await emailServiceProvider.SendEmailAsync(userEmailAddress, "Confirm your email", message);
         }
