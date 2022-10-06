@@ -84,7 +84,7 @@ The user can also log in by redeeming one of the authenticator recovery codes.
 
 ### 3. Other available screens (Forgot Passowrd flow, Login With Authenticator Code, Validate Email, Confirm Phone Number)
 
-## TODOS
+## Todos
  1. Implement the cookie auth for Single page apps hosted on the same domain as the backend and server side rendered SPAs. 
  2. Deploy these apps to Azure with terraform.
  3. Write tests for the Minimal API backend and reactjs frontend.
