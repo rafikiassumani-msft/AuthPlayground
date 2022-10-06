@@ -308,7 +308,7 @@ namespace IdentityMinimalAPIs.Services.UserAuthExtensions
 
                 if (user is null)
                 {
-                    return Results.UnprocessableEntity(new AuthResultDTO
+                    return Results.NotFound(new AuthResultDTO
                     {
                         Succeeded = false,
                         StatusCode = 404,
@@ -334,7 +334,13 @@ namespace IdentityMinimalAPIs.Services.UserAuthExtensions
                     });
                 }
 
-                return Results.UnprocessableEntity();
+                return Results.UnprocessableEntity(new AuthResultDTO
+                {
+                    Succeeded = false,
+                    StatusCode = 422,
+                    Message = "Unable to verify your email",
+                    TimeStamp = DateTime.Now,
+                });
             })
                 .Accepts<EmailConfirmationDTO>("application/json")
                 .Produces<UserResponseDTO>()
