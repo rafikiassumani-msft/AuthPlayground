@@ -67,8 +67,7 @@ When the token is revoked either through calling `/auth/logout` or `auth/revoke`
 - `npm install`
 - `npm start`
 
-Your app should be served at port 3000. Depending on the port for your backend, you may need to change the following value of the url in the `.env.development` 
-
+Your app should be served at port 3000. Depending on the port for your backend, you may need to change the following value of the url in the `.env.development`: 
 `REACT_APP_API_URL=https://localhost:7115`
 
 ## Some UI Screens
