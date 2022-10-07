@@ -85,5 +85,7 @@ The user can also log in by redeeming one of the authenticator recovery codes.
 
 ## Todos
  1. Implement the cookie auth for Single page apps hosted on the same domain as the backend and server side rendered SPAs. 
- 2. Deploy these apps to Azure with terraform.
- 3. Write tests for the Minimal API backend and reactjs frontend.
+ 2. Social media signing
+ 3. Encrypted JWT
+ 4. Deploy these apps to Azure with terraform.
+ 5. Write tests for the Minimal API backend and reactjs frontend.
