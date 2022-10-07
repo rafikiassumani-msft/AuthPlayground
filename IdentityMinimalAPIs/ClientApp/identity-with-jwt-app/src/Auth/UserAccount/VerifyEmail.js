@@ -30,10 +30,10 @@ const VerifyEmail = () => {
         }
       );
 
-      if (!response.Ok) {
+      if (!response.ok) {
         throw new Error("Unable to verify your email");
       }
-      console.log(response.json());
+      console.log(await response.json());
       setIsVerified(true);
     } catch (error) {
       console.error(error);

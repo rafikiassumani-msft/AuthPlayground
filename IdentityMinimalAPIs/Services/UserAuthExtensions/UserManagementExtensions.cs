@@ -317,29 +317,46 @@ namespace IdentityMinimalAPIs.Services.UserAuthExtensions
                     });
                 }
 
-                var code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(emailConfirmationDTO.ConfirmationCode));
-                var result = await userManager.ConfirmEmailAsync(user, code);
-
-                if (result.Succeeded)
+                if (user.EmailConfirmed == false)
                 {
+                    var code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(emailConfirmationDTO.ConfirmationCode));
+                    var result = await userManager.ConfirmEmailAsync(user, code);
 
-                    return Results.Ok(new UserResponseDTO
+                    if (result.Succeeded)
                     {
-                        UserId = user.Id,
-                        Email = user.Email,
-                        FirstName = user.FirstName,
-                        LastName = user.LastName,
-                        EmailConfirmed = user.EmailConfirmed,
-                        TwoFactorEnabled = user.TwoFactorEnabled,
+
+                        return Results.Ok(new UserResponseDTO
+                        {
+                            UserId = user.Id,
+                            Email = user.Email,
+                            FirstName = user.FirstName,
+                            LastName = user.LastName,
+                            EmailConfirmed = user.EmailConfirmed,
+                            TwoFactorEnabled = user.TwoFactorEnabled,
+                        });
+                    }
+
+                    return Results.UnprocessableEntity(new AuthResultDTO
+                    {
+                        Succeeded = false,
+                        StatusCode = 422,
+                        Message = "Unable to verify your email",
+                        TimeStamp = DateTime.Now,
                     });
+
                 }
 
-                return Results.UnprocessableEntity(new AuthResultDTO
+
+                //Email is already confirmed.
+
+                return Results.Ok(new UserResponseDTO
                 {
-                    Succeeded = false,
-                    StatusCode = 422,
-                    Message = "Unable to verify your email",
-                    TimeStamp = DateTime.Now,
+                    UserId = user.Id,
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    EmailConfirmed = user.EmailConfirmed,
+                    TwoFactorEnabled = user.TwoFactorEnabled,
                 });
             })
                 .Accepts<EmailConfirmationDTO>("application/json")
