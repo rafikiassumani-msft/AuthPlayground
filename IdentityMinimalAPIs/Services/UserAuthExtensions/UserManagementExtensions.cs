@@ -29,6 +29,7 @@ namespace IdentityMinimalAPIs.Services.UserAuthExtensions
                     FirstName = userDTO.FirstName,
                     LastName = userDTO.LastName,
                     Email = userDTO.Email,
+                    PhoneNumber = userDTO.PhoneNumber
                 };
 
                 if (userDTO.Enabled2fa)
