@@ -56,7 +56,9 @@ export default function SignUp() {
       let jsonResponse = response.json();
 
       if (!jsonResponse.emailConfirmed) {
-        navigate("/verify-email");
+        const message = "We just need to verify your email address before you can access your"
+          + "account. Please check your mailbox to confirm you recieve a link to verify your email."
+        navigate("/notify", {replace: true, state: {alertType: "warning", alertMessage: message}});
       }
     } catch (err) {
       console.log(err);

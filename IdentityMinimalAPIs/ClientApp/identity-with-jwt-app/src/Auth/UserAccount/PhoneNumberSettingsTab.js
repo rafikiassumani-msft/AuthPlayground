@@ -10,7 +10,7 @@ import {
   InputAdornment,
   Alert,
 } from "@mui/material";
-import { green } from "@mui/material/colors";
+import { green, red } from "@mui/material/colors";
 
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -116,7 +116,7 @@ export default function PhoneNumberSettingsTab() {
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="end">
-                          <CancelIcon />
+                          <CancelIcon sx={{ color: red[800] }}/>
                         </InputAdornment>
                       ),
                     }}

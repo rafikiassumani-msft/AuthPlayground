@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
+import CancelIcon from "@mui/icons-material/Cancel";
 import { green, red } from "@mui/material/colors";
 import { postData } from "../fetchData";
 import { useAuth } from "../AuthProvider";
@@ -150,7 +151,7 @@ export default function UserInfoTab() {
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
-                            <CheckBoxIcon sx={{ color: red[800] }} />
+                            <CancelIcon sx={{ color: red[800] }} />
                           </InputAdornment>
                         ),
                       }}
