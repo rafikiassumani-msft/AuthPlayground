@@ -60,8 +60,6 @@ export default function VerifyPhoneNumber() {
 
   return (
     <React.Fragment>
-      <Card sx={{ minWidth: 275 }}>
-        <CardContent>
           {responseSuccess && (
             <Alert variant="filled" severity="success">
               Phone number successfully verified.
@@ -104,8 +102,6 @@ export default function VerifyPhoneNumber() {
               )}
             </Grid>
           </Box>
-        </CardContent>
-      </Card>
     </React.Fragment>
   );
 }

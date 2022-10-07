@@ -78,7 +78,7 @@ export default function PhoneNumberSettingsTab() {
           )}
 
           {responseSuccess && (
-            <Grid container spacing={2}>
+            <Grid container spacing={2} sx={{mt: 3}}>
               <Grid item xs={12}>
                 <VerifyPhoneNumber />
               </Grid>
