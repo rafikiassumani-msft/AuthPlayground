@@ -318,7 +318,7 @@ namespace IdentityMinimalAPIs.Services.UserAuthExtensions
                     });
                 }
 
-                if (user.EmailConfirmed == false)
+                if (!user.EmailConfirmed)
                 {
                     var code = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(emailConfirmationDTO.ConfirmationCode));
                     var result = await userManager.ConfirmEmailAsync(user, code);

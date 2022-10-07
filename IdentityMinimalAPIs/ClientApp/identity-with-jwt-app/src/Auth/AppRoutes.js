@@ -11,7 +11,7 @@ import UserAccountMenu from "./UserAccount/UserAccountMenu";
 import LoginWithRecoveryCode from "./SignIn/LoginWithRecoveryCode";
 import ForgotPassword from "./SignIn/ForgotPassword";
 import ResetPasword from "./SignIn/ResetPassword";
-import NotificationPage from "./NotificationPage";
+import NavigateNotificationPage from "./NavigateNotificationPage";
 
 function AppRoutes() {
   return (
@@ -34,7 +34,7 @@ function AppRoutes() {
       <Route path="/login-with-recovery-code" element={<LoginWithRecoveryCode />} />
 
       <Route path="/menu" element={<UserAccountMenu />} />
-      <Route path="/notify" element={<NotificationPage />} />
+      <Route path="/notify" element={<NavigateNotificationPage />} />
     </Routes>
   );
 }

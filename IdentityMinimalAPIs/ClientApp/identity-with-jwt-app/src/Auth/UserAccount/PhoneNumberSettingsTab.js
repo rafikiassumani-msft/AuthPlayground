@@ -38,7 +38,7 @@ export default function PhoneNumberSettingsTab() {
       const response = await postData({ url, accessToken, data });
 
       if (!response.ok) {
-        if (response.status == 422) {
+        if (response.status === 422) {
           var { message } = await response.json();
           throw new Error(message);
         } else {
@@ -49,7 +49,7 @@ export default function PhoneNumberSettingsTab() {
       }
 
       setResponseSucces(true);
-      setUserData({ ...userData});
+      setUserData({ ...userData });
     } catch (error) {
       setDisplayError(true);
       setErrorMessage(error.message);
@@ -75,6 +75,14 @@ export default function PhoneNumberSettingsTab() {
             <Alert variant="filled" severity="error">
               {errorMessage}
             </Alert>
+          )}
+
+          {responseSuccess && (
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <VerifyPhoneNumber />
+              </Grid>
+            </Grid>
           )}
 
           <Grid container spacing={2}>
@@ -116,7 +124,7 @@ export default function PhoneNumberSettingsTab() {
                     InputProps={{
                       startAdornment: (
                         <InputAdornment position="end">
-                          <CancelIcon sx={{ color: red[800] }}/>
+                          <CancelIcon sx={{ color: red[800] }} />
                         </InputAdornment>
                       ),
                     }}
@@ -136,7 +144,6 @@ export default function PhoneNumberSettingsTab() {
           </Grid>
         </CardContent>
       </Card>
-      {responseSuccess && <VerifyPhoneNumber />}
     </React.Fragment>
   );
 }

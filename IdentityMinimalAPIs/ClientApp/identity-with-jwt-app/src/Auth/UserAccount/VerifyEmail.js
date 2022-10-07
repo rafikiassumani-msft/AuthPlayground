@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useSearchParams} from "react-router-dom";
+import { useSearchParams} from "react-router-dom";
 import { Alert, Link } from "@mui/material";
 
 const VerifyEmail = () => {
@@ -7,11 +7,7 @@ const VerifyEmail = () => {
   let [isVerified, setIsVerified] = useState(false);
 
   useEffect(() => {
-    const confirmEmail = async () => {
-      await verifyEmail();
-    };
-
-    confirmEmail();
+      verifyEmail();
   }, []);
 
   const verifyEmail = async () => {
@@ -51,9 +47,8 @@ const VerifyEmail = () => {
     );
   } else {
     return (
-      <Alert severity="info">
-        We just need to verify your email address before you can access your
-        account. Please check your mailbox to confirm you recieve a link to verify your email.
+      <Alert severity="warning">
+        Your email has not been verified yet. 
       </Alert>
     );
   }
